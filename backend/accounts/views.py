@@ -3,6 +3,7 @@ from .serializer import RegisterSerializer
 from rest_framework.decorators import api_view, permission_classes, authentication_classes
 from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework.response import Response
+from .models import UserProfile
 from rest_framework_simplejwt.views import (
     TokenObtainPairView,
     TokenRefreshView,
@@ -75,8 +76,8 @@ def authenticate(request):
 def logout(request):
     try:
         res = Response()
-        res.delete_cookie('access', path='/', samsite='None')
-        res.delete_cookie('refresh', path='/', samsite='None')
+        res.delete_cookie('access', path='/', samesite='None')
+        res.delete_cookie('refresh', path='/', samesite='None')
         return Response({'success': True})
     except:
         return Response({'success': False})
@@ -84,8 +85,28 @@ def logout(request):
 @api_view(['POST'])
 @permission_classes([AllowAny])
 def register(request):
-    serializer = RegisterSerializer(data=request.data)
+    try:
+        serializer = RegisterSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+    except Exception as e:
+        print(e)
+        return Response({'success': False})
+    
+@api_view(['PUT'])
+@permission_classes([IsAuthenticated])
+def update_profile(request):
+    profile = request.user.userprofile
+    serializer = UserProfile(profile, data=request.data)
     if serializer.is_valid():
         serializer.save()
         return Response(serializer.data)
     return Response(serializer.errors)
+
+@api_view(['GET'])
+@permission_classes([IsAuthenticated])
+def get_profile(request):
+    user = request.user
+    profile = user.userprofile
+    return profile
