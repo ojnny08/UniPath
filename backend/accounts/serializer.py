@@ -23,6 +23,7 @@ class RegisterSerializer(serializers.ModelSerializer):
 
 class UserProfileSerializer(serializers.ModelSerializer):
     class Meta:
+        model = UserProfile
         fields = ['name', 'university', 'highschool', 'avg_grade', 'target_school']
 
     def update(self, instance, validated_data):

@@ -1,6 +1,6 @@
 from django.shortcuts import render
-from .serializer import RegisterSerializer
-from rest_framework.decorators import api_view, permission_classes, authentication_classes
+from .serializer import RegisterSerializer, UserProfileSerializer
+from rest_framework.views import APIView
 from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework.response import Response
 from .models import UserProfile
@@ -66,47 +66,51 @@ class MyTokenRefreshView(TokenRefreshView):
             res.data = {"refreshed": False}
 
 
-@api_view(['GET'])
-@permission_classes([IsAuthenticated])
-def authenticate(request):
-    return Response({'authenticated': True})
+class AuthenticateView(APIView):
+    permission_classes = [IsAuthenticated]
 
-@api_view(['POST'])
-@permission_classes([IsAuthenticated])
-def logout(request):
-    try:
-        res = Response()
-        res.delete_cookie('access', path='/', samesite='None')
-        res.delete_cookie('refresh', path='/', samesite='None')
+    def get(self, request):
         return Response({'success': True})
-    except:
-        return Response({'success': False})
 
-@api_view(['POST'])
-@permission_classes([AllowAny])
-def register(request):
-    try:
-        serializer = RegisterSerializer(data=request.data)
+class LogoutView(APIView):
+    permission_classes = [IsAuthenticated]
+
+    def post(self, request):
+        try:
+            res = Response({'success': True})
+            res.delete_cookie('access', path='/', samesite='None')
+            res.delete_cookie('refresh', path='/', samesite='None')
+            return res
+        except:
+            return Response({'success': False})
+
+class RegisterView(APIView):
+    permission_classes = [AllowAny]
+
+    def post(self, request):
+        try:
+            serializer = RegisterSerializer(data=request.data)
+            if serializer.is_valid():
+                serializer.save()
+                return Response(serializer.data)
+            return Response(serializer.errors, status=400)
+        except Exception as e:
+            print(e)
+            return Response({'success': False})
+
+class ProfileView(APIView):
+    permission_classes = [IsAuthenticated]
+
+    def get(self, request):
+        profile = request.user.userprofile
+        serializer = UserProfileSerializer(data=profile)
+        return Response(serializer.data)
+    
+    def put(self, request):
+        profile = request.user.userprofile
+        serializer = UserProfileSerializer(profile, data=request.data)
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data)
-    except Exception as e:
-        print(e)
-        return Response({'success': False})
+        return Response(serializer.errors, status=400)
     
-@api_view(['PUT'])
-@permission_classes([IsAuthenticated])
-def update_profile(request):
-    profile = request.user.userprofile
-    serializer = UserProfile(profile, data=request.data)
-    if serializer.is_valid():
-        serializer.save()
-        return Response(serializer.data)
-    return Response(serializer.errors)
-
-@api_view(['GET'])
-@permission_classes([IsAuthenticated])
-def get_profile(request):
-    user = request.user
-    profile = user.userprofile
-    return profile
