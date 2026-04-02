@@ -1,16 +1,18 @@
-import api from './axiosInstance'
+import api from '../axiosInstance'
 
-const authenticate = () => {
-    api.get('/accounts/auth/')
+export const authenticate = async () => {
+    return await api.get('accounts/auth/')
 }
-const login = (username, password) => (
-    api.post('/accounts/token/', {username, password})
-)
-const logout = () => (
-    api.post('/accounts/logout/')
-)
-const register = (data) => (
-    api.post('/accounts/reigister/', data)
-)
+export const login = async (username, password) => {
+    return await api.post('accounts/token/', {username, password})
+}
+export const logout = async () => {
+    return await api.post('accounts/logout/')
+}
 
-export default {authenticate, login, logout, register}
+export const register = async (data) => {
+    return await api.post('accounts/reigister/', data)
+}
+    
+
+
