@@ -1,0 +1,41 @@
+.post-create {
+    background: white;
+    border: 1px solid #e5e7eb;
+    border-radius: 12px;
+    padding: 1rem 1.25rem;
+    margin-bottom: 1.5rem;
+}
+
+.post-create-header input {
+    width: 100%;
+    box-sizing: border-box;
+    font-size: 15px;
+    font-weight: 500;
+    border: none;
+    outline: none;
+    margin-bottom: 8px;
+}
+
+.post-create-body textarea {
+    width: 100%;
+    box-sizing: border-box;
+    font-size: 14px;
+    line-height: 1.6;
+    border: none;
+    outline: none;
+    resize: none;
+    min-height: 80px;
+    margin-bottom: 12px;
+}
+
+.post-create button {
+    padding: 6px 16px;
+    background: black;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+    float: right;
+}

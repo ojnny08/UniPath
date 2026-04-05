@@ -52,7 +52,7 @@ REST_FRAMEWORK = {
         'accounts.authentication.CookieJWTAuthentication',
     ),
     'DEFAULT_PERMISSION_CLASSES': [
-        'rest_framework.permissions.IsAuthenticated',
+        'rest_framework.permissions.AllowAny',
     ]
 }
 SIMPLE_JWT = {

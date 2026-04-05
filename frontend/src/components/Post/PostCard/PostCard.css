@@ -1,0 +1,117 @@
+.post-card {
+    background: white;
+    border: 1px solid #e5e7eb;
+    border-radius: 12px;
+    padding: 1rem 1.25rem;
+    margin-bottom: 1rem;
+}
+
+.post-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 8px;
+}
+
+.post-header h1 {
+    font-size: 16px;
+    font-weight: 500;
+    margin: 0;
+}
+
+.post-header input {
+    font-size: 16px;
+    font-weight: 500;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.post-body {
+    margin-bottom: 12px;
+}
+
+.post-body-text {
+    font-size: 14px;
+    line-height: 1.6;
+    color: #374151;
+    margin: 0 0 8px;
+}
+
+.post-body textarea {
+    width: 100%;
+    font-size: 14px;
+    line-height: 1.6;
+    box-sizing: border-box;
+    resize: vertical;
+    min-height: 80px;
+    margin-bottom: 8px;
+}
+
+.post-author {
+    font-size: 12px;
+    color: #9ca3af;
+    margin: 0;
+}
+
+.post-menu {
+    position: relative;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.post-menu > button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 14px;
+    color: #6b7280;
+    padding: 0 4px;
+}
+
+.post-menu-opts {
+    position: absolute;
+    right: 0;
+    top: 24px;
+    background: white;
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+    overflow: hidden;
+    min-width: 100px;
+    z-index: 10;
+}
+
+.post-menu-opts button {
+    display: block;
+    width: 100%;
+    padding: 8px 16px;
+    font-size: 13px;
+    text-align: left;
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+.post-menu-opts button:last-child {
+    color: #ef4444;
+}
+
+.post-btn {
+    display: flex;
+    gap: 8px;
+    margin-top: 12px;
+}
+
+.post-btn button {
+    padding: 6px 16px;
+    border-radius: 6px;
+    font-size: 13px;
+    cursor: pointer;
+    border: 1px solid #e5e7eb;
+    background: none;
+}
+
+.post-btn button:first-child {
+    background: black;
+    color: white;
+    border-color: black;
+}
