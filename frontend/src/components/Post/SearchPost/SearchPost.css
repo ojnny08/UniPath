@@ -1,0 +1,32 @@
+.search-form {
+    display: flex;
+    align-items: center;
+    background: #f3f4f6;
+    border-radius: 6px;
+    padding: 0 12px;
+    width: 100%;
+}
+
+.search-input-wrap {
+    display: flex;
+    align-items: center;
+    flex: 1;
+}
+
+.search-input-wrap input {
+    border: none;
+    outline: none;
+    background: transparent;
+    font-size: 14px;
+    color: #374151;
+    width: 100%;
+    padding: 8px;
+}
+
+.search-input-wrap input::placeholder {
+    color: #9ca3af;
+}
+
+.search-form button {
+    display: none;
+}

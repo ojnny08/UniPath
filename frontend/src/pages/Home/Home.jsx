@@ -36,7 +36,6 @@ const Home = () => {
      
     return (
         <div >
-            <CreatePost onPostCreate={handlePostCreate}/>
             {posts.map((item) => (
                 <PostCard 
                     key={item.id}

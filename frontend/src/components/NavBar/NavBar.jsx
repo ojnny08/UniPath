@@ -22,7 +22,7 @@ const NavBar = () => {
             <div className="navbar-logo">UniPath</div>
             
             <NavLink to='/home' className="navbar-link">Home</NavLink>
-            <NavLink to='/create' className="navbar-link">+</NavLink>
+            <NavLink to='/submit' className="navbar-link">+</NavLink>
             
             <div className="">
                 <button className="navbar-logout" onClick={handleLogout}>
